@@ -1,6 +1,7 @@
 package com.abhi.daos;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,6 +22,10 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
     public List<Object[]> getEmpCountByDeptId();
     
     Page<Employee> findAll(Pageable pageable);
+
+    public Optional<Employee> findByUsername(String username);
+
+    public Optional<Employee> findByEmail(String email);
 
     
 
