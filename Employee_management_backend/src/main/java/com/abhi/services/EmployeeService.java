@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.abhi.daos.EmployeeRepository;
@@ -14,8 +15,15 @@ import com.abhi.pojos.Employee;
 public class EmployeeService {
 	@Autowired
 	EmployeeRepository er;
+
+	@Autowired
+    private  PasswordEncoder passwordEncoder;
+
 		public void saveOrUpdate(Employee emp)
 		{
+
+			String encryptedPassword = passwordEncoder.encode(emp.getPassword());
+			emp.setPassword(encryptedPassword);
 			er.save(emp);
 		}
 		public List<Employee> getAllEmployees()
